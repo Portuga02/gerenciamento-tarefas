@@ -18,7 +18,9 @@
                                 <th scope="col-xs-3">Nascimento</th>
                                 <th scope="col-xs-3">CPF</th>
                                 <th scope="col-xs-3">Endereço</th>
-                              
+                                <th scope="col-xs-3">Cidade</th>
+                                <th scope="col-xs-3">Estado</th>
+                                <th scope="col-xs-3">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
