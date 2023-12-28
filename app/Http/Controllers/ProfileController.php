@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
-{
+{ 
     /**
      * Display the user's profile form.
      */
@@ -47,6 +47,7 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+       
 
         Auth::logout();
 
