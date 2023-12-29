@@ -14,31 +14,31 @@
                     </h3>
                 </div>
                 @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="p-6 text-gray-900">
-                   
-                    <form>
+
+                    <form method="POST" action="{{ route('todoUpdate') }}">
+                        @csrf
+                        @method('PUT')
                         <div class="p-6">
                             <x-input-label class="form-label"> {{ 'Titulo' }}
                                 <x-text-input id="title" class="block mt-1 w-full" type="text" name="title"
-                                    required autocomplete="title" />
+                                    required autocomplete="title" value="{{ $todo->description }}" />
                             </x-input-label>
                         </div>
                         <div class="p-6">
 
-                            <label for="message"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sua
-                                Mensagem</label>
-                            <textarea id="message" name="description" rows="4"
+
+                            <textarea name="description" rows="5"
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
-                                placeholder="Sua anotação..."></textarea>
+                                >{{ $todo->description }}</textarea>
 
                         </div>
                         <div class="flex justify-end mt-4">

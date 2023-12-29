@@ -16,12 +16,19 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <b> Titulo da tarefa </b> {{ $todo->title }} <br>
+
+                        <b> Descrição da tarefa </b> {{ $todo->description }}
+                        
                     </div>
-                    <b> Titulo da tarefa </b> {{ $todo->title }}
-
-                    <b> Descrição da tarefa </b> {{ $todo->description }}
-
+                    <x-primary-button>
+                        <a href="{{ route('todo') }}"
+                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                            {{ __(' Retornar ') }}
+                        </a>
+                    </x-primary-button>
                 </div>
             </div>
         </div>
+    </div>
 </x-app-layout>

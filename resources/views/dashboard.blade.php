@@ -50,21 +50,21 @@
 
                                     <td class="px-6 py-4 text-center">
                                         <x-danger-button>
-                                            <a href="#"
+                                            <a href="{{ route('profile.edit') }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                                 {{ __(' Editar') }}
                                             </a>
                                         </x-danger-button>
                                         {{-- <x-primary-button>
-                                            <a href="{{ route('todoShow') }}"
+                                            <a href="{{ route('showTodo', Auth::user()->id) }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                                 {{ __(' Visualizar') }}
                                             </a>
                                         </x-primary-button> --}}
                                         <x-secondary-button>
-                                            <a href="#"
+                                            <a href="{{ route('profile.destroy') }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                                EXCLUIR </a>
+                                                {{ __('Excluir') }} </a>
                                         </x-secondary-button>
                                     </td>
                                 </tr>

@@ -24,11 +24,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/todo', [TodoController::class, 'index'])->name('todo');
-Route::get('todo/create', [TodoController::class, 'create'])->name('todoCreate');
-Route::get('/todo/{todo}', 'TodoController@show')->name('todos');
-// Route::get('/todo/show/{id}', [TodoController::class, 'show'])->name('todoShow');
+Route::get('todo/show/{id}', [TodoController::class, 'show'])->name('showTodo');
 Route::post('todo/store', [TodoController::class, 'store'])->name('todoStore');
-
+Route::get('todo/create', [TodoController::class, 'create'])->name('todoCreate');
+Route::get('todo/{id}/edit', [TodoController::class, 'edit'])->name('todoEdit');
+Route::put('todo/update', [TodoController::class, 'update'])->name('todoUpdate');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -56,16 +56,22 @@
                                             @else
                                                 <x-secondary-button class="ms-3">
                                                     {{ __(' Incompleto') }}
-                                                    </x-primary-button>
+                                                </x-secondary-button>
                                             @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center" id="outros">
-                                            <x-danger-button>
-                                                {{ __(' Editar') }}
-                                            </x-danger-button>
+                                            <x-secondary-button class="ms-3">
+                                                <a href="{{ route('todoEdit', $todosLists->id) }}"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                    {{ __(' Editar') }}
+                                                </a>
+                                            </x-secondary-button>
                                             <x-primary-button>
-                                                {{ __(' Visualizar') }}
+                                                <a href="{{ route('showTodo', $todosLists->id) }}"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                    {{ __(' Visualizar') }}
+                                                </a>
                                             </x-primary-button>
 
                                             <form action="" class="inner">

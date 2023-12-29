@@ -19,16 +19,7 @@ class TodoController extends Controller
     {
         return view('auth.create-todo');
     }
-    public function show($id)
-    {
-        $todo = Todo::find($id);
-        if (!$todo) {
-            return to_route('todo')->withErrors([
-                'error' => ' Existe um erro na lista selecionada'
-            ]);
-        }
-        return view('auth.showTodo', ['todo', $todo]);
-    }
+
     public function store(TodoRequest $request)
     {
 
@@ -42,9 +33,37 @@ class TodoController extends Controller
 
         return to_route('todo');
     }
-
-    public function edit()
+    public function show($id)
     {
-        return view('auth.edit-todo');
+        $todo = Todo::find($id);
+
+        if (!$todo) {
+            request()->session()->flash('alert-success', 'Item criado com sucesso');
+            return to_route('todo')->withErrors([
+                'error' => 'EXISTE UM ERRO NA LISTA'
+            ]);
+        }
+
+        return view('auth.showTodo', ['todo' => $todo]);
+    }
+
+    public function edit($id)
+    {
+        $todo = Todo::find($id);
+
+        if (!$todo) {
+            request()->session()->flash('alert-success', 'Item criado com sucesso');
+            return to_route('todo')->withErrors([
+                'error' => 'EXISTE UM ERRO NA LISTA'
+            ]);
+        }
+        return view('auth.edit-todo', ['todo' => $todo]);
+    }
+
+    public function update(TodoRequest $request)
+    {
+
+
+        return $request->all();
     }
 }

@@ -28,8 +28,7 @@
                 @endif
 
 
-                <form method="POST" action="{{ route('store') }}">
-
+                <form method="POST" action="{{ route('todoStore') }}">
                     @csrf
                     <div class="p-6">
                         <x-input-label class="form-label"> {{ 'Titulo' }}
@@ -56,7 +55,7 @@
                 </form>
             </div>
         </div>
-        </div>
-        </div>
-        </div>
+    </div>
+    </div>
+    </div>
 </x-app-layout>
