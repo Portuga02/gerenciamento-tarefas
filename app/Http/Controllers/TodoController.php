@@ -52,18 +52,33 @@ class TodoController extends Controller
         $todo = Todo::find($id);
 
         if (!$todo) {
-            request()->session()->flash('alert-success', 'Item criado com sucesso');
+            request()->session()->flash('alert-success', 'EXISTE UM ERRO NA LISTA');
             return to_route('todo')->withErrors([
                 'error' => 'EXISTE UM ERRO NA LISTA'
             ]);
         }
+        
         return view('auth.edit-todo', ['todo' => $todo]);
     }
 
     public function update(TodoRequest $request)
     {
 
+        $todo = Todo::find($request->todo_id);
 
-        return $request->all();
+        if (!$todo) {
+            request()->session()->flash('alert-success', 'EXISTE UM ERRO NA LISTA');
+            return to_route('todo')->withErrors([
+                'error' => 'EXISTE UM ERRO NA LISTA'
+            ]);
+        }
+        $todo->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'is_completed' => $request->is_completed
+        ]);
+        request()->session()->flash('alert-success', 'Item atualizado com sucesso');
+        
+        return view('auth.showTodo', ['todo' => $todo]);
     }
 }
