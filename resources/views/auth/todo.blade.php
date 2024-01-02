@@ -1,5 +1,5 @@
 <x-app-layout>
-    
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
 
@@ -11,10 +11,16 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    @if (Session::has('alert-success'))
+                    @if (session('status') == 'alert-success')
                         <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
                             role="alert">
                             {{ Session::get('alert-success') }}
+                        </div>
+                    @endif
+                    @if (Session::has('error'))
+                        <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                            role="alert">
+                            {{ Session::get('alert-danger') }}
                         </div>
                     @endif
 
@@ -24,17 +30,17 @@
                                 @if (count($todoList) > 0)
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Titulo
+                                            {{ __('Titulo') }}
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Descrição
+                                            {{ __(' Descrição') }}
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Completo
+                                            {{ __(' Completo') }}
                                         </th>
 
                                         <th scope="col" class="px-6 py-4 text-center">
-                                            Ações
+                                            {{ __('Ações') }}
                                         </th>
                                     </tr>
                             </thead>
@@ -55,7 +61,7 @@
                                                 </x-primary-button>
                                             @else
                                                 <x-secondary-button class="ms-3">
-                                                    {{ __(' Incompleto') }}
+                                                    {{ __(' Pendente') }}
                                                 </x-secondary-button>
                                             @endif
                                         </td>
@@ -68,24 +74,18 @@
                                                 </a>
                                             </x-secondary-button>
 
-                                            <x-primary-button class="ms-3">
+                                            <x-danger-button class="ms-3">
                                                 <a href="{{ route('showTodo', $todosLists->id) }}"
                                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                                    {{ __(' Visualizar') }}
+                                                    {{ __(' Visualizar Tarefas') }}
                                                 </a>
                                             </x-primary-button>
-                                            {{-- <x-primary-button class="ms-3">
-                                                
-                                                <a href="{{ route('todoDestroy', $todosLists->id) }}"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                                    {{ __(' DELETAR') }}
-                                                </a>
-                                            </x-primary-button> --}}
-                                            <form method="POST" action="{{ route('todoDestroy') }}" class="ms-3">
+
+                                            <form method="POST" action="{{ route('todoDestroy') }}" class="p-5 inline-flex items-center">
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="hidden" name="todo_id" value="{{ $todosLists->id }}" />
-                                                <x-primary-button type='submit' class="ms-3">
+                                                <x-primary-button type='submit' class="ms-2">
                                                     {{ __('Deletar') }}
                                                 </x-primary-button>
                                             </form>
@@ -96,7 +96,7 @@
                             </tbody>
                         </table>
                     @else
-                        <h4>Não se tem usuários para esta lista </h4>
+                        <h4> {{ __(' Não existem usuários com listas de tarefas') }} </h4>
                         @endif
                     </div>
 

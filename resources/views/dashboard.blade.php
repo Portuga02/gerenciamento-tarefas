@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b   hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                         {{ Auth::user()->id }}
                                     </th>
@@ -55,12 +55,12 @@
                                                 {{ __(' Editar') }}
                                             </a>
                                         </x-danger-button>
-                                        {{-- <x-primary-button>
+                                        <x-primary-button>
                                             <a href="{{ route('showTodo', Auth::user()->id) }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                                 {{ __(' Visualizar') }}
                                             </a>
-                                        </x-primary-button> --}}
+                                        </x-primary-button>
                                         <x-secondary-button>
                                             <a href="{{ route('profile.destroy') }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">

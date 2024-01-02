@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
+use Symfony\Component\HttpFoundation\Response;
 
 class TodoController extends Controller
 {
@@ -23,72 +24,112 @@ class TodoController extends Controller
     public function store(TodoRequest $request)
     {
 
-        Todo::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'is_completed' => 0
-        ]);
+        try {
+            Todo::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'is_completed' => 0,
 
-        $request->session()->flash('alert-success', 'Item criado com sucesso');
+            ]);
 
-        return to_route('todo');
+            $request->session()->flash('alert-success', 'Item criado com sucesso');
+
+            return to_route('todo');
+        } catch (\Throwable $th) {
+            return response()->json([
+                'info' => 'error',
+                'result' => 'Não foi possível capturar os dados do usuário!.',
+                'error' => $th->getMessage(),
+                'Linha' => $th->getLine(),
+                'Arquivo' => $th->getFile()
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
     public function show($id)
     {
-        $todo = Todo::find($id);
+        try {
+            $todo = Todo::find($id);
 
-        if (!$todo) {
+            if (!$todo) {
+                request()->session()->flash('alert-error', 'O item não pode ser criado com sucesso. Por favor, tente novamente');
+                return to_route('todo')->withErrors([
+                    'error' => 'error no sistema'
+                ]);
+            }
             request()->session()->flash('alert-success', 'Item criado com sucesso');
-            return to_route('todo')->withErrors([
-                'error' => 'EXISTE UM ERRO NA LISTA'
-            ]);
+            return view('auth.showTodo', ['todo' => $todo]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'info' => 'error',
+                'result' => 'Não foi possível capturar os dados do usuário!.',
+                'error' => $th->getMessage(),
+                'Linha' => $th->getLine(),
+                'Arquivo' => $th->getFile()
+            ], Response::HTTP_BAD_REQUEST);
         }
-
-        return view('auth.showTodo', ['todo' => $todo]);
     }
 
-    public function edit($id)
+    public function editTodo($id)
     {
-        $todo = Todo::find($id);
 
-        if (!$todo) {
-            request()->session()->flash('alert-success', 'EXISTE UM ERRO NA LISTA');
-            return to_route('todo')->withErrors([
-                'error' => 'EXISTE UM ERRO NA LISTA'
-            ]);
+        try {
+            $todo = Todo::find($id);
+            if (!$todo) {
+                request()->session()->flash('alert-error', 'EXISTE UM ERRO NA LISTA');
+                return to_route('todo')->withErrors([
+                    'error' => 'EXISTE UM ERRO NA LISTA'
+                ]);
+            }
+            request()->session()->flash('alert-success', 'Item foi editado com sucesso');
+            return view('auth.edit-todo', ['todo' => $todo]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'info' => 'error',
+                'result' => 'Não foi possível capturar os dados do usuário!.',
+                'error' => $th->getMessage(),
+                'Linha' => $th->getLine(),
+                'Arquivo' => $th->getFile()
+            ], Response::HTTP_BAD_REQUEST);
         }
-
-        return view('auth.edit-todo', ['todo' => $todo]);
     }
 
     public function update(TodoRequest $request)
     {
+        try {
+            $todo = Todo::find($request->todo_id);
 
-        $todo = Todo::find($request->todo_id);
-
-        if (!$todo) {
-            request()->session()->flash('alert-success', 'EXISTE UM ERRO NA LISTA');
-            return to_route('todo')->withErrors([
-                'error' => 'EXISTE UM ERRO NA LISTA'
+            if (!$todo) {
+                request()->session()->flash('alert-error', 'Não conseguimos atualiza sua atividade. Por favor, tente novamente');
+                return to_route('todo')->withErrors([
+                    'error' => 'Existe um erro que deve ser avaliado'
+                ]);
+            }
+            $todo->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'is_completed' => $request->is_completed
             ]);
-        }
-        $todo->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'is_completed' => $request->is_completed
-        ]);
-        request()->session()->flash('alert-success', 'Item atualizado com sucesso');
+            request()->session()->flash('alert-success', 'Item atualizado com sucesso');
 
-        return view('auth.showTodo', ['todo' => $todo]);
+            return view('auth.showTodo', ['todo' => $todo]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'info' => 'error',
+                'result' => 'Não foi possível capturar os dados do usuário!.',
+                'error' => $th->getMessage(),
+                'Linha' => $th->getLine(),
+                'Arquivo' => $th->getFile()
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
-    public function destroy(TodoRequest $request)
+    public function dropTodo(Request $request)
     {
 
         $todo = Todo::find($request->todo_id);
 
         if (!$todo) {
-            request()->session()->flash('error', 'EXISTE UM ERRO NA LISTA');
+            request()->session()->flash('error', 'Não foi possivel deletar o item existente');
             return to_route('todo')->withErrors([
                 'error' => 'EXISTE UM ERRO NA LISTA'
             ]);
@@ -96,6 +137,6 @@ class TodoController extends Controller
 
         $todo->delete();
         $request->session()->flash('alert-success', 'Item deletado com sucesso');
-        
+        return to_route('todo');
     }
 }

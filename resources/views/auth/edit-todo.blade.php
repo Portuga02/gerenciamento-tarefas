@@ -23,35 +23,29 @@
                     </div>
                 @endif
                 <div class="p-6 text-gray-900">
-
                     <form method="POST" action="{{ route('todoUpdate') }} ">
                         @method('PUT')
                         @csrf
                         <input class="block mt-1 w-full" type="hidden" name="todo_id" value="{{ $todo->id }}" />
-                              
+
                         <div class="p-6">
-
-                            
-                            <x-input-label class="form-label"> {{ 'Titulo' }}
-                            </x-input-label>
-                            <x-text-input class="block mt-1 w-full" type="text" name="title" required  autocomplete="title" value="{{ $todo->title }}" />
-                               
-
+                            <x-input-label class="form-label"> {{ 'Titulo' }}</x-input-label>
+                            <x-text-input class="block mt-1 w-full" type="text" name="title" required
+                                autocomplete="title" value="{{ $todo->title }}" />
                         </div>
                         <div class="p-6">
-
-
                             <textarea name="description" rows="5"
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 ">{{ $todo->description }}</textarea>
-
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 ">
+                                {{ $todo->description }}
+                            </textarea>
                         </div>
                         <div class="block mt-4">
-                            <x-input-label> Status</x-input-label>
+                            <x-input-label> {{ __('Status') }}</x-input-label>
                             <select name="is_completed"
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 ">
-                                <option disabled selected> Selecione uma opção</option>
-                                <option value="0"> Completo</option>
-                                <option value="1"> Incompleto</option>
+                                <option disabled selected> {{ __('Selecione uma opção') }}</option>
+                                <option value="0"> {{ __('Completo') }}</option>
+                                <option value="1"> {{ __('Pendente') }}</option>
                             </select>
                         </div>
                         <div class="flex justify-end mt-4">
@@ -65,5 +59,5 @@
             </div>
         </div>
     </div>
-    </div>
+
 </x-app-layout>
