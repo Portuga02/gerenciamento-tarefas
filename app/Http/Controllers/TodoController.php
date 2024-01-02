@@ -57,7 +57,7 @@ class TodoController extends Controller
                 'error' => 'EXISTE UM ERRO NA LISTA'
             ]);
         }
-        
+
         return view('auth.edit-todo', ['todo' => $todo]);
     }
 
@@ -78,7 +78,24 @@ class TodoController extends Controller
             'is_completed' => $request->is_completed
         ]);
         request()->session()->flash('alert-success', 'Item atualizado com sucesso');
-        
+
         return view('auth.showTodo', ['todo' => $todo]);
+    }
+
+    public function destroy(TodoRequest $request)
+    {
+
+        $todo = Todo::find($request->todo_id);
+
+        if (!$todo) {
+            request()->session()->flash('error', 'EXISTE UM ERRO NA LISTA');
+            return to_route('todo')->withErrors([
+                'error' => 'EXISTE UM ERRO NA LISTA'
+            ]);
+        }
+
+        $todo->delete();
+        $request->session()->flash('alert-success', 'Item deletado com sucesso');
+        
     }
 }

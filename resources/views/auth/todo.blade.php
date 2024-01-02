@@ -1,5 +1,5 @@
 <x-app-layout>
-
+    
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
 
@@ -67,18 +67,27 @@
                                                     {{ __(' Editar') }}
                                                 </a>
                                             </x-secondary-button>
-                                            <x-primary-button>
+
+                                            <x-primary-button class="ms-3">
                                                 <a href="{{ route('showTodo', $todosLists->id) }}"
                                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                                     {{ __(' Visualizar') }}
                                                 </a>
                                             </x-primary-button>
-
-                                            <form action="" class="inner">
+                                            {{-- <x-primary-button class="ms-3">
+                                                
+                                                <a href="{{ route('todoDestroy', $todosLists->id) }}"
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                    {{ __(' DELETAR') }}
+                                                </a>
+                                            </x-primary-button> --}}
+                                            <form method="POST" action="{{ route('todoDestroy') }}" class="ms-3">
+                                                @csrf
+                                                @method('DELETE')
                                                 <input type="hidden" name="todo_id" value="{{ $todosLists->id }}" />
-                                                <x-secondary-button>
-                                                    {{ __(' Deletar') }}
-                                                </x-secondary-button>
+                                                <x-primary-button type='submit' class="ms-3">
+                                                    {{ __('Deletar') }}
+                                                </x-primary-button>
                                             </form>
                                         </td>
                                     </tr>
