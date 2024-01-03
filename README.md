@@ -22,7 +22,8 @@ SISTEMA SIMPLES PARA CADASTRAMENTO DE USUARIOS E USABILIDADE DE CRIAÇÃO DE ATI
          npm 
          node versão atual 
          vite
-         fonteaewsome      
+         fonteaewsome    
+         breezer-larvel
 
 
 
@@ -34,7 +35,11 @@ SISTEMA SIMPLES PARA CADASTRAMENTO DE USUARIOS E USABILIDADE DE CRIAÇÃO DE ATI
          criar à base de dados do sistema: gerenciamento_tarefas
          rodas às migrations : php artisan migrate
          instalar fonteawesome :  npm install @fortawesome/fontawesome-free       
-                 
+          
+           se tiver necessidade instalar também o laravel breezer dentro do projeto já clonado em maquina
+           composer require laravel/breeze --dev  
+           escolher a versao com blade e livewire tailwindcss       
+         
          npm run build or npm run dev
          php artisan serve
 
