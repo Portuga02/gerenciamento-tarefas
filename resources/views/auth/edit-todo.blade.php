@@ -13,6 +13,8 @@
                         {{ 'Editar a notação Existente' }}
                     </h3>
                 </div>
+
+             
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -39,8 +41,9 @@
                                 {{ $todo->description }}
                             </textarea>
                         </div>
-                        <div class="block mt-4">
+                        <div class="p-6">
                             <x-input-label> {{ __('Status') }}</x-input-label>
+
                             <select name="is_completed"
                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 ">
                                 <option disabled selected> {{ __('Selecione uma opção') }}</option>
@@ -49,9 +52,10 @@
                             </select>
                         </div>
                         <div class="flex justify-end mt-4">
-                            <x-primary-button>
-                                {{ __('Salvar às alterações') }}
-                            </x-primary-button>
+                            <button type='submit' alt="Excluir Tarefa"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <i class="fa-solid fa-check fa-lg"> </i> {{ __('Editar') }}
+                            </button>
                         </div>
 
                     </form>

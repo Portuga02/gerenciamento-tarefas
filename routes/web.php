@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TodoController;
+use App\Models\Todo;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    $users = Todo::paginate(15);
+ 
+    $users->withPath('/auth/todo');
     Route::get('/todo', [TodoController::class, 'index'])->name('todo');
     Route::get('/show/{id}', [TodoController::class, 'show'])->name('showTodo');
     Route::post('/store', [TodoController::class, 'store'])->name('todoStore');

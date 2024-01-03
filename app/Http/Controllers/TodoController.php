@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Controller;
+
 
 class TodoController extends Controller
 {
@@ -15,6 +17,11 @@ class TodoController extends Controller
         return view('auth.todo', [
             'todoList' => $todoList
         ]);
+        // return view('auth.todo', [
+
+        //     $todoList = DB::table('todos')->paginate(15),
+        //     'todoList' => $todoList,
+        // ]);
     }
     public function create()
     {
@@ -34,7 +41,7 @@ class TodoController extends Controller
 
             $request->session()->flash('alert-success', 'Item criado com sucesso');
 
-            return to_route('todo');
+            return to_route('todoCreate');
         } catch (\Throwable $th) {
             return response()->json([
                 'info' => 'error',

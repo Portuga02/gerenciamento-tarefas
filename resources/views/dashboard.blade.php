@@ -10,71 +10,68 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    @if (Session::has('alert-success'))
-                        <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
-                            role="alert">
-                            {{ Session::get('alert-success') }}
-                        </div>
-                    @endif
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        ID
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        {{ __('ID') }}
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Nome
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        {{ __('Nome') }}
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        e-mail
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        {{ __('E-mail') }}
                                     </th>
 
                                     <th scope="col" class="px-6 py-4 text-center">
-                                        Ações
+                                        {{ __('Ações') }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                <tr class="bg-white border-b hover:bg-gray-50">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  text-center">
                                         {{ Auth::user()->id }}
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-center">
                                         {{ Auth::user()->name }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-center">
                                         {{ Auth::user()->email }}
                                     </td>
 
                                     <td class="px-6 py-4 text-center">
-                                        <x-danger-button>
+                                        <button
+                                            class="bg-green-500 hover:bg-green-700  text-white font-bold py-2 px-4 rounded">
+
                                             <a href="{{ route('profile.edit') }}"
-                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                                {{ __(' Editar') }}
+                                                class=" hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                                title="Ver meu perfil">
+
+                                                <i class="fa-solid fa-circle-user fa-xl"></i>
                                             </a>
-                                        </x-danger-button>
-                                        <x-primary-button>
+                                        </button>
+                                        <button class="bg-blue-500  text-white font-bold py-2 px-4 rounded">
                                             <a href="{{ route('showTodo', Auth::user()->id) }}"
-                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                                {{ __(' Visualizar') }}
+                                                class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+                                                title="Ir para suas listas de tarefas">
+                                                <i class="fa-solid fa-file-signature"></i> </a>
                                             </a>
-                                        </x-primary-button>
-                                        <x-secondary-button>
+                                        </button>
+                                        <button class="bg-red-500  text-white font-bold py-2 px-4 rounded">
                                             <a href="{{ route('profile.destroy') }}"
-                                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                                {{ __('Excluir') }} </a>
-                                        </x-secondary-button>
+                                                class="bg-red-500  text-white font-bold py-2 px-4 rounded"
+                                                title="Excluir este usuário">
+                                                <i class="fa-solid fa-xmark fa-sm"></i> </a>
+                                        </button>
                                     </td>
                                 </tr>
-
-
                             </tbody>
                         </table>
                     </div>
-
-
                 </div>
             </div>
         </div>
