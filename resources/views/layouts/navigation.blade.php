@@ -18,6 +18,17 @@
                         {{ __('Todo List') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('todoCreate')" :active="request()->routeIs('todoCreate')">
+                        {{ __('Criar Novo item') }}
+                    </x-nav-link>
+                </div>
+               
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('todoEdit',Auth::user()->id)" :active="request()->routeIs('todoEdit')">
+                        {{ __('Editar itens Todo') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
