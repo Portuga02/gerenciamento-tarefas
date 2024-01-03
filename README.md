@@ -24,7 +24,11 @@ SISTEMA SIMPLES PARA CADASTRAMENTO DE USUARIOS E USABILIDADE DE CRIAÇÃO DE ATI
          vite
          fonteaewsome    
          breezer-larvel
-
+        se der algum erro de drive
+        
+        ativar o drive no php. ini  
+        
+        extension=pdo_pgsql
 
 
 1.1 para executar o projeto deve-se usar o npm e também o php artisan server e as migrations do laravel, no terminal execute 
