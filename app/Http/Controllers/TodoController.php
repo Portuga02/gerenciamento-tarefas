@@ -17,11 +17,7 @@ class TodoController extends Controller
         return view('auth.todo', [
             'todoList' => $todoList
         ]);
-        // return view('auth.todo', [
-
-        //     $todoList = DB::table('todos')->paginate(15),
-        //     'todoList' => $todoList,
-        // ]);
+       
     }
     public function create()
     {
