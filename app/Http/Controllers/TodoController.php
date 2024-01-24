@@ -17,7 +17,6 @@ class TodoController extends Controller
         return view('auth.todo', [
             'todoList' => $todoList
         ]);
-       
     }
     public function create()
     {
