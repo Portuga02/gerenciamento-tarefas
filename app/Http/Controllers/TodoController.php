@@ -103,7 +103,7 @@ class TodoController extends Controller
             if (!$todo) {
                 request()->session()->flash('alert-error', 'Não conseguimos atualiza sua atividade. Por favor, tente novamente');
                 return to_route('todo')->withErrors([
-                    'error' => 'Existe um erro que deve ser avaliado'
+                    'error' => 'Existe um erro que deve ser avaliado.'
                 ]);
             }
             $todo->update([
