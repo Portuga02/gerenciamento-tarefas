@@ -63,7 +63,7 @@ class TodoController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'info' => 'error',
-                'result' => 'Não foi possível capturar os dados do usuário!.',
+                'result' => 'Não foi possível capturar os dados do usuário tente novamente!.',
                 'error' => $th->getMessage(),
                 'Linha' => $th->getLine(),
                 'Arquivo' => $th->getFile()
